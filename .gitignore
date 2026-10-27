@@ -1,0 +1,38 @@
+# =========================
+# Python / Backend
+# =========================
+
+__pycache__/
+*.py[cod]
+.venv/
+
+# Python environment / secrets
+.env
+.env.*
+!.env.example
+
+# SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+
+# =========================
+# React / Frontend
+# =========================
+
+node_modules/
+dist/
+
+# Frontend environment / secrets
+.env
+.env.*
+!.env.example
+
+
+# =========================
+# General
+# =========================
+
+.DS_Store
+.vscode/
