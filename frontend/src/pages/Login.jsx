@@ -1,21 +1,37 @@
 import Navbar from "../components/navbar";
 import Card from '../components/Card'
-import GradientDiv from "../components/GradientDiv";
+import Background from "../components/Background";
 import FormField from "../components/FormField";
 import FormSubmissionButton from "../components/FormSubmissionButton"
-import axios from "axios";
+import authService from "../services/authService";
+
+import { useState } from "react";
+
 
 export default function Login () {
+    // maybe here make a mutual function with register cuz pretty similar just "login" instead of "register"
     function handleSubmit(e) {
         e.preventDefault();
-        // TODO
-        // Send the info to backend 
-        // Using websockets 😱
+        
+        const response = authService.submitAuthRequest({
+            username: formData.username, 
+            password: formData.password,
+            authEndpoint: "login",
+        })
+
+        if (response.ok) {
+            // TODO: link chat screen here
+
+        } else {
+            isLoginInvalid(true);
+        }
     }
+
+    const [isLoginInvalid, setIsLoginInvalid] = useState(false);
 
     return (
         <>
-            <GradientDiv>
+            <Background>
                 {/* keep Navbar items none here:*/}
                 <Navbar />
                 <Card className='my-auto mx-auto px-32 py-20 text-center'>
@@ -29,8 +45,12 @@ export default function Login () {
 
                         <FormSubmissionButton name="Login"/>
                     </form>
+
+                    {<p className={`text-warning ${(isLoginInvalid)? "visible" : "invisible"}`}>
+                            Sorry, invalid login details.
+                    </p>}
                 </Card>
-            </GradientDiv>
+            </Background>
         </>
     );
 }

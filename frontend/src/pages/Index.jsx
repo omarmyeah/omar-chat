@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Logo from '../components/Logo';
-import GradientDiv from '../components/GradientDiv';
+import Background from '../components/Background';
 import Card from '../components/Card';
 
 const faqs = [
@@ -66,11 +66,11 @@ function FrequentlyAskedQuestions({ questionsArray, name, placeholder }) {
         {questionsArray.map(element => {
           if (typeof element.answer != 'object') {
             return (
-              <AccordionElement title={element.question.replace(placeholder, name)} content={element.answer.replace(placeholder, name)} />
+              <AccordionElement key={element.question} title={element.question.replace(placeholder, name)} content={element.answer.replace(placeholder, name)} />
             );
           } else {
             return (
-                <AccordionElement title={element.question.replace(placeholder, name)} content={
+                <AccordionElement key={element.question} title={element.question.replace(placeholder, name)} content={
                     <>
                     <p>{element.answer.intro.replace(placeholder, name)}</p>
                     <ul className='list-disc list-inside py-3'>
@@ -123,14 +123,14 @@ function Footer({ Logo }) {
 export default function Index() {
   return (
     <>
-    <GradientDiv>
+    <Background>
         <Navbar clickableItems={[{'Login':'login'}, {'Register':'register'}]}/>
         <Welcome />
         <Card className='w-3/4 mx-auto'>
             <FrequentlyAskedQuestions questionsArray={faqs} name="Omar Chat" placeholder={"{name}"}/>
         </Card>
         <Footer Logo={<Logo />}/>
-    </GradientDiv>
+    </Background>
     </>
   );
 }

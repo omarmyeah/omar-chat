@@ -1,11 +1,11 @@
 import Navbar from "../components/Navbar";
 import Card from '../components/Card'
-import GradientDiv from "../components/GradientDiv";
+import Background from "../components/Background";
 import FormField from "../components/FormField";
 import FormSubmissionButton from "../components/FormSubmissionButton"
+import authService from "../services/authService"
 
-
-import { useState } from "react";
+import { use, useState } from "react";
 
 
 export default function Registration () {
@@ -14,14 +14,27 @@ export default function Registration () {
         password: '',
         confirmation: ''
     })
+    const [isUsernameTaken, setIsUsernameTaken] = useState(false)
 
+
+    // TODO: use this.
     const isFormValid = formData.username.trim() && formData.email.trim() && formData.password.trim();
 
     function handleSubmit(e) {
         e.preventDefault();
-        // TODO
-        // Send the info to backend 
-        // Using websockets 😱
+        
+        const response = authService.submitAuthRequest({
+            username: formData.username, 
+            password: formData.password,
+            authEndpoint: "register",
+        })
+
+        if (response.ok) {
+            // TODO: link chat screen here
+
+        } else {
+            setIsUsernameTaken(true);
+        }
     }
 
     function handleChange(e) {
@@ -35,7 +48,7 @@ export default function Registration () {
 
     return (
         <>
-            <GradientDiv>
+            <Background>
                 {/* keep Navbar items none here:*/}
                 <Navbar />
                 <Card className='my-auto mx-auto px-20 py-20 text-center'>
@@ -47,11 +60,13 @@ export default function Registration () {
                         <FormField placeholder="Create a Username" label="Username" id="password-input" type="text" className="input-lg w-full" maxlength/>
                         <FormField placeholder="Create a Password" label="Password" id="username-input" type="password" className="input-lg w-full" />
                         <FormField placeholder="Confirm Password" label="Confirm Password" id="password-confirmation-input" type="password" className="input-lg w-full" />
-
-                         <FormSubmissionButton name="Register"/>
+                        <FormSubmissionButton name="Register"/>
+                        {<p className={`text-warning ${(isUsernameTaken)? "visible" : "invisible"}`}>
+                            Sorry, this username is already taken.
+                        </p>}
                     </form>
                 </Card>
-            </GradientDiv>
+            </Background>
         </>
     );
 }

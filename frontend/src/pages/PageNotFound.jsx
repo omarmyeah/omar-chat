@@ -1,11 +1,11 @@
-import GradientDiv from "../components/GradientDiv";
+import Background from "../components/Background";
 import Navbar from "../components/navbar";
 import FormSubmissionButton from "../components/FormSubmissionButton";
 import { NavLink } from "react-router";
 
 export default function PageNotFound() {
     return (
-        <GradientDiv>
+        <Background>
             <Navbar />
             <div className="flex justify-center items-center min-h-screen gap-12">
                 <div className=" text-center">
@@ -18,6 +18,6 @@ export default function PageNotFound() {
                     <img src="404.png" alt="" />
                 </div>
             </div>
-        </GradientDiv>
+        </Background>
     );
 }

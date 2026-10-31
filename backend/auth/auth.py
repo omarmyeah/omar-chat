@@ -19,4 +19,7 @@ def login(user: User):
 
 @router.post("/register")
 def register(user: User):
-    ...
+    return HTTPException(
+        status_code=409,
+        detail="Username already taken.",
+    )
