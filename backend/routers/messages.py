@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends
-from ..schemas import ConversationQueryParams
+from ..schemas import Conversation
 from ..database.repository import get_all_messages
 
 router = APIRouter(
@@ -7,7 +7,7 @@ router = APIRouter(
 )
 
 @router.get("/messages")
-def get_messages(conversation: ConversationQueryParams = Depends()):
+def get_messages(conversation: Conversation = Depends()):
     return get_all_messages(
         sender_id=conversation.sender_id,
         receiver_id=conversation.receiver_id,

@@ -4,9 +4,11 @@ class User(BaseModel):
     username: str
     password: str
 
-class ConversationQueryParams(BaseModel):
+class Conversation(BaseModel):
     sender_id: str
     receiver_id: str
 
-class Message(ConversationQueryParams):
+class Message(Conversation):
     content: str
+
+# TODO: make websocket message sent validation

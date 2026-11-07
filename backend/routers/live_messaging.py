@@ -60,12 +60,22 @@ async def live_messaging(websocket: WebSocket, client_id: int):
             # see what action is there
             if action == "sendMessage":
                 if "content" in action:
-                    insert_new_message(content=data.get("content"))
+                    # add message to db
+                    insert_new_message(content=data.get("content"), 
+                        sender_id=client_id, 
+                        #receiver_id=
+                    )
+                    # send the new message to the receiver
+                    #manager.send_message_to_connection(
+                    #    message=,
+                    #    target_user_id=,)
+                    #
                 else:
                     send_key_not_found_error_ws(
                         websocket=websocket, 
                         key="content"
                     )
+                    continue
 
     except WebSocketDisconnect:
         manager.remove_user(websocket)

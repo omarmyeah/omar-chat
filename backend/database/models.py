@@ -15,3 +15,8 @@ class Messages(SQLModel, table=True):
     sender_id: int = Field(foreign_key="users.id")
     receiver_id: int = Field(foreign_key="users.id")
     created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
+
+class Sessions(SQLModel, tatable=True):
+    id: str
+    # the cookie expires certain time after creation
+    expiration_time: datetime = Field(default_factory=lambda: datetime.now(UTC))
