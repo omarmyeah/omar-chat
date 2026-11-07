@@ -70,6 +70,3 @@ export default function Registration () {
         </>
     );
 }
-
-// git commit -am "Added errors and added more account-related routes, and started working on live messaging with webSockets. "
-// git status -- backend/errors.py
