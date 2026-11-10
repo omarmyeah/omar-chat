@@ -23,7 +23,7 @@ def login(user: User):
         # user isn't found
         stored_password = None
     
-    if not stored_password or stored_password != password_hash.hash(user.password):
+    if not stored_password or not password_hash.verify(user.password, stored_password):
         raise HTTPException(status_code=401, detail="Invalid login info")
 
 @router.post("/register")

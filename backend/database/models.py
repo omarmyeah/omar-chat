@@ -17,6 +17,8 @@ class Messages(SQLModel, table=True):
     created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
 
 class Sessions(SQLModel, table=True):
-    id: str
+    id: str # the cookie "itself"
     # the cookie expires certain time after creation
     expiration_time: datetime = Field(default_factory=lambda: datetime.now(UTC))
+    csrf_token: str
+    
