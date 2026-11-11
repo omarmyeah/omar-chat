@@ -1,7 +1,7 @@
 from sqlalchemy.exc import IntegrityError, NoResultFound
 from sqlmodel import Session, create_engine, select, or_, and_
 from ..errors import UserAlreadyExistsError, UserNotFoundError
-from .models import Messages, Users
+from .models import Messages, Users, Sessions
 
 sqlite_file_name = "database.db"
 sqlite_url = f"sqlite:///./{sqlite_file_name}"
@@ -79,3 +79,8 @@ def change_password(username: str, new_password: str):
 
         # add the result to db
         session.add(user)
+
+def insert_session(session_id: str, user_id: int):
+    with Session(engine) as sqlmodel_session:
+        # to avoid name conflict between session and sqlmodel 
+        session = Sessions(id=session_id, user_id=user_id)

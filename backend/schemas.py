@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 class User(BaseModel):
     username: str
@@ -10,5 +10,8 @@ class Conversation(BaseModel):
 
 class Message(Conversation):
     content: str
+
+class LoginResponse(BaseModel):
+    csrf_token: str = Field(serialization_alias="csrfToken")
 
 # TODO: make websocket message sent validation

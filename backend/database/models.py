@@ -18,7 +18,13 @@ class Messages(SQLModel, table=True):
 
 class Sessions(SQLModel, table=True):
     id: str # the cookie "itself"
+    
+    # the user behind the cookie
+    user_id = Field(foreign_key="users.id")
+    
     # the cookie expires certain time after creation
     expiration_time: datetime = Field(default_factory=lambda: datetime.now(UTC))
+
+    # and finally a csrf token we're doing this kinda manually since this isn't django
     csrf_token: str
     
