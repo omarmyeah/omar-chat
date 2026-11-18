@@ -7,6 +7,10 @@ __pycache__/
 *.py[cod]
 .venv/
 
+# error files
+ruff_errors.txt
+mypy_errors.txt
+
 # Python environment / secrets
 .env
 .env.*
