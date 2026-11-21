@@ -1,10 +1,8 @@
-from sqlalchemy.exc import IntegrityError, NoResultFound
-from sqlmodel import Session, and_, create_engine, or_, select, desc
-
-from ..errors import UserAlreadyExistsError, UserNotFoundError
-from .models import Messages, Sessions, Users
+from sqlmodel import Session, and_, create_engine, desc, or_, select
 
 from config import DATABASE_URL
+
+from ..models import Messages, Sessions
 
 # create engine
 engine = create_engine(DATABASE_URL, echo=True)
@@ -29,3 +27,11 @@ def get_all_messages(sender_id: int, receiver_id: int):
     with Session(engine) as session:
         result = session.exec(statement)
         return result
+
+def get_user_id_by_session_id(id: str) -> int:
+    statement = select(Sessions.user_id).where(Sessions.id == id)
+
+    with Session(engine) as session:
+        result = session.exec(statement).one()
+
+    return result

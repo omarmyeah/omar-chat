@@ -1,9 +1,15 @@
 import logging
 from json import JSONDecodeError
+from typing import Annotated
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect, status, Cookie
 
-from fastapi import APIRouter, WebSocket, WebSocketDisconnect
+from .messaging_repository import (
+    insert_new_message,
+    get_user_id_by_session_id,
+)
 
-from .messaging_repository import insert_new_message
+from collections import defaultdict
+from ..config import ALLOWED_ORIGINS
 
 # declare route, but future note: maybe not needed since this is websockets not REST.
 router = APIRouter()
@@ -21,7 +27,7 @@ class ConnectionManager:
         2. Finding by websocket, useful for 
         """
         self.connected: dict[WebSocket, int] = {}
-        self.user_connections: dict[int, set[WebSocket]] = {}
+        self.user_connections = defaultdict(set)
 
     def remove_user(self, websocket: WebSocket):
         self.connected.pop(websocket)
@@ -30,6 +36,7 @@ class ConnectionManager:
         try:
             await websocket.accept()
             self.connected[websocket] = user_id
+            self.user_connections[user_id] = websocket
         except Exception:
             await websocket.close()
             raise
@@ -46,11 +53,24 @@ class ConnectionManager:
 
 manager = ConnectionManager()
 
-@router.websocket("/ws/{client_id}")
-async def live_messaging(websocket: WebSocket, client_id: int):
+@router.websocket("/ws/")
+async def live_messaging(
+    websocket: WebSocket, 
+    session_id: Annotated[str | None, Cookie()] = None
+):
     try:
-        # id param required here, do this after auth
-        await manager.add_user(websocket)
+        # verify origin since CORS doesn't handle it automatically for ws
+        # and also verify session_id
+        if websocket.headers.get("origin") not in ALLOWED_ORIGINS or session_id is None:
+            await websocket.close(code=status.WS_1008_POLICY_VIOLATION)
+
+        user_id = get_user_id_by_session_id(session_id)
+        
+        # add the connection as well as its user id
+        await manager.add_user(
+            websocket=websocket,
+            user_id=user_id,
+        )
     except Exception:
         logger.exception("Failed to connect")
         return 
@@ -76,8 +96,9 @@ async def live_messaging(websocket: WebSocket, client_id: int):
             if action == "sendMessage":
                 if "content" in action:
                     # add message to db
-                    insert_new_message(content=data.get("content"), 
-                        sender_id=client_id, 
+                    insert_new_message(
+                        content=data.get("content"), 
+                        sender_id=user_id, 
                         #receiver_id=
                     )
                     # send the new message to the receiver
