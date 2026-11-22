@@ -1,4 +1,5 @@
 # get session / engine
+from fastapi import Request
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 from sqlmodel.ext.asyncio.session import AsyncSession
 
@@ -16,6 +17,11 @@ async_session_factory = async_sessionmaker(
     expire_on_commit=False,  # prevents surprise lazy-load errors after commit
 )
 
-async def get_session():
-    async with async_session_factory() as session:
-        yield session
+async def get_session(request: Request):
+    async with request.app.state.db_session_factory() as session:
+        try:
+            yield session
+        except Exception:
+            # in case of error rollback transactions
+            await session.rollback()
+            raise
