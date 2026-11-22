@@ -9,7 +9,7 @@ from .messaging_repository import (
 )
 
 from collections import defaultdict
-from ..config import ALLOWED_ORIGINS
+from ..core.config import ALLOWED_ORIGINS
 
 # declare route, but future note: maybe not needed since this is websockets not REST.
 router = APIRouter()

@@ -1,7 +1,7 @@
 from secrets import token_urlsafe
 from fastapi import Depends
 
-from ..config import COOKIE_ID_BYTES, CSRF_TOKEN_BYTES
+from ..core.config import COOKIE_ID_BYTES, CSRF_TOKEN_BYTES
 
 def generate_session_id(bytes: int = COOKIE_ID_BYTES) -> str:
     return token_urlsafe(bytes)

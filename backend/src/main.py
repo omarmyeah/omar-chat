@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from .auth import auth_routers
 from .messaging import messaging_routers, messaging_websockets
-from .config import ALLOWED_ORIGINS
+from .core.config import ALLOWED_ORIGINS
 
 app = FastAPI()
 

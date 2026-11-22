@@ -4,7 +4,7 @@ from typing import Annotated
 from fastapi import APIRouter, Cookie, HTTPException, Response
 from pwdlib import PasswordHash
 
-from ..errors import UserAlreadyExistsError, SessionNotFoundError
+from ..core.errors import UserAlreadyExistsError, SessionNotFoundError
 from .auth_schemas import (
     CSRFTokenResponse, 
     LoginParams,

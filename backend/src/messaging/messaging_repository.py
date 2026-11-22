@@ -1,8 +1,8 @@
 from sqlmodel import Session, and_, create_engine, desc, or_, select
 
-from config import DATABASE_URL
+from src.core.config import DATABASE_URL
 
-from ..models import Messages, Sessions
+from ..core.models import Messages, Sessions
 
 # create engine
 engine = create_engine(DATABASE_URL, echo=True)

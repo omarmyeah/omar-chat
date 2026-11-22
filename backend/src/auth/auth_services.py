@@ -8,7 +8,7 @@ from auth_repository import (
 from fastapi import Response
 from pwdlib import PasswordHash
 
-from ..errors import UserNotFoundError
+from ..core.errors import UserNotFoundError
 from .auth_repository import get_user_password
 from .auth_schemas import User
 
