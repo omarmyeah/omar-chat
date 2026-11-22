@@ -2,7 +2,7 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends  #,HTTPException
 
-from ..database import get_all_messages
+from .messaging_repository import get_all_messages
 from .messaging_schemas import Conversation
 
 router = APIRouter(

@@ -1,10 +1,12 @@
 import os
 
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
-load_dotenv()
+# since .env isn't in src/
+load_dotenv(find_dotenv())
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+# use pooled for the application but direct for the migrations
+DATABASE_URL = os.getenv("DATABASE_URL_POOLED")
 CSRF_TOKEN_BYTES = 32
 COOKIE_ID_BYTES = 32
 

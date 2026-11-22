@@ -5,7 +5,11 @@ from fastapi import APIRouter, Cookie, HTTPException, Response
 from pwdlib import PasswordHash
 
 from ..errors import UserAlreadyExistsError, SessionNotFoundError
-from ..messaging.messaging_schemas import CSRFTokenResponse, User
+from .auth_schemas import (
+    CSRFTokenResponse, 
+    LoginParams,
+    RegistrationParams,
+)
 from .auth_dependencies import (
     generate_csrf_token,
     generate_session_id,
@@ -28,7 +32,7 @@ router = APIRouter(
 )
 
 @router.post("/login", response_model=CSRFTokenResponse) # CSRFTokenResponse ensures camelCase for response (csrf_token => csrfToken)
-def login(response: Response, user: User):
+async def login(response: Response, user: LoginParams):
     # validates login and makes new session
 
     if not login_details_valid(user):
@@ -52,7 +56,7 @@ def login(response: Response, user: User):
     return {"csrf_token": csrf_token}
 
 @router.post("/register")
-def register(user: User):
+def register(user: RegistrationParams):
     try:
         new_user = insert_new_user(
             username=user.username,
@@ -67,7 +71,7 @@ def register(user: User):
             detail="Username already taken.",
         )
 
-@router.post("/csrf_token", response_model=CSRFTokenResponse)
+@router.get("/csrf_token", response_model=CSRFTokenResponse)
 def csrf_token(session_id: Annotated[str | None, Cookie()] = None):
     # endpoint that retuns csrf token given session id
 
