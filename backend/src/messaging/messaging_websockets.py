@@ -1,15 +1,15 @@
 import logging
+from collections import defaultdict
 from json import JSONDecodeError
 from typing import Annotated
-from fastapi import APIRouter, WebSocket, WebSocketDisconnect, status, Cookie
 
-from .messaging_repository import (
-    insert_new_message,
-    get_user_id_by_session_id,
-)
+from fastapi import APIRouter, Cookie, WebSocket, WebSocketDisconnect, status
 
-from collections import defaultdict
 from ..core.config import ALLOWED_ORIGINS
+from .messaging_repository import (
+    get_user_id_by_session_id,
+    insert_new_message,
+)
 
 # declare route, but future note: maybe not needed since this is websockets not REST.
 router = APIRouter()

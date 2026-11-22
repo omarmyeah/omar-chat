@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field
 
+
 class UserCredentials(BaseModel):
     username: str
     password: str

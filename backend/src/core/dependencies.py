@@ -1,8 +1,8 @@
 # get session / engine
-import os
-from .config import DATABASE_URL
-from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
+from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 from sqlmodel.ext.asyncio.session import AsyncSession
+
+from .config import DATABASE_URL
 
 engine = create_async_engine(
     DATABASE_URL,

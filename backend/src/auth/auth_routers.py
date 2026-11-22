@@ -4,20 +4,20 @@ from typing import Annotated
 from fastapi import APIRouter, Cookie, HTTPException, Response
 from pwdlib import PasswordHash
 
-from ..core.errors import UserAlreadyExistsError, SessionNotFoundError
-from .auth_schemas import (
-    CSRFTokenResponse, 
-    LoginParams,
-    RegistrationParams,
-)
+from ..core.errors import SessionNotFoundError, UserAlreadyExistsError
 from .auth_dependencies import (
     generate_csrf_token,
     generate_session_id,
 )
 from .auth_repository import (
-    get_csrf_token_by_session_id, 
-    insert_new_user,
     delete_session_by_session_id,
+    get_csrf_token_by_session_id,
+    insert_new_user,
+)
+from .auth_schemas import (
+    CSRFTokenResponse,
+    LoginParams,
+    RegistrationParams,
 )
 from .auth_services import (
     add_session_by_username,
