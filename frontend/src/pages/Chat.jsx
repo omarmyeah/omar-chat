@@ -1,5 +1,7 @@
 import Searchbar from "../components/Searchbar";
 import ContactsSidebar from "../components/Sidebar";
+import MessagesDisplay from "../components/MessagesDisplay";
+import MessageInput from "../components/MessageInput";
 
 export default function Chat() {
     return (
@@ -27,7 +29,15 @@ export default function Chat() {
                         ]}
                     />
                 </div>
-                <div className="col-span-3">
+                <div className="col-span-5 flex flex-1">
+                    <div className="grid grid-rows-12 w-full h-full">
+                        <div className="row-span-11 flex flex-1">
+                            <MessagesDisplay className="flex flex-1" />
+                        </div>
+                        <div className="row-span-1">
+                            <MessageInput className={"w-full"}/>
+                        </div>
+                    </div>
                     {/* Chat place */}
                 </div>
             </div>
