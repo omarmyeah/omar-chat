@@ -11,11 +11,10 @@ export default function Navbar({ clickableItems=[] }) {
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1 text-xl">
              {clickableItems && clickableItems.map((item) => {
-                itemName = Object.keys(item)[0];
                 return (
-                <li key={itemName} className="texthover: ">
-                  <NavLink to={`/${Object.values(item)[0]}`} className={`hover:text-primary`} end>
-                    {itemName}
+                <li key={item.name} className="texthover: ">
+                  <NavLink to={item.path} className={`hover:text-primary`} end>
+                    {item.name}
                   </NavLink>
                 </li>
                 );

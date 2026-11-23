@@ -12,3 +12,7 @@
   --color-neutral: #1A0B2E;
   --color-warning: #E7000B;
 }
+
+body, #root {
+  min-height: 100vh;
+}

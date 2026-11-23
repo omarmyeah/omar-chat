@@ -14,7 +14,18 @@ createRoot(root).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route element={<NavbarBgFooter navbarClickableItems={[{'Login':'login'}, {'Register':'register'}]} />}>
+        <Route element={<NavbarBgFooter navbarClickableItems={
+          [
+            {
+              name: 'Login',
+              path: '/login'
+            },
+            {
+              name: 'Register',
+              path: '/register'
+            }
+          ]
+        } />}>
           <Route path="/" element={<Index />} />
         </Route>
         <Route element={<NavbarWithBg />}>
