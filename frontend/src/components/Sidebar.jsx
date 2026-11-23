@@ -3,8 +3,8 @@ import { NavLink } from "react-router";
 export default function ContactsSidebar({ contacts, onClick = (contact) => console.log(contact.name), parentUrl = '/chat' }) {
     console.log(contacts)
     return (
-        <div className="bg-black flex flex-1">
-            <ul className="flex-col flex-1">
+        <div className="">
+            <ul className=" flex-col flex-1">
                 {contacts.map((contact) => (
                     <li 
                         className="py-3 flex flex-col justify-center items-center hover:text-primary"

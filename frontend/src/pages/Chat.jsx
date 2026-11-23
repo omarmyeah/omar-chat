@@ -7,7 +7,7 @@ export default function Chat() {
     return (
         <>
             <div className="grid grid-cols-6 flex-1">
-                <div className="col-span-1 border flex flex-col">
+                <div className="col-span-1 border flex flex-col bg-black">
                     {/* Contacts list*/}
                     <h1 className="text-3xl text-center">Contacts</h1>
                     {/* make this functional */}
