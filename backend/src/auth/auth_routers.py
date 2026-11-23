@@ -8,6 +8,7 @@ from ..core.errors import SessionNotFoundError, UserAlreadyExistsError
 from .auth_dependencies import (
     generate_csrf_token,
     generate_session_id,
+    AuthServiceDependency,
 )
 from .auth_repository import (
     delete_session_by_session_id,
@@ -32,7 +33,11 @@ router = APIRouter(
 )
 
 @router.post("/login", response_model=CSRFTokenResponse) # CSRFTokenResponse ensures camelCase for response (csrf_token => csrfToken)
-async def login(response: Response, user: LoginParams):
+async def login(
+    response: Response, 
+    user: LoginParams,
+    auth_response: AuthServiceDependency,
+    ):
     # validates login and makes new session
 
     if not login_details_valid(user):
@@ -72,7 +77,10 @@ def register(user: RegistrationParams):
         )
 
 @router.get("/csrf_token", response_model=CSRFTokenResponse)
-def csrf_token(session_id: Annotated[str | None, Cookie()] = None):
+def csrf_token(
+    auth_response: AuthServiceDependency,
+    session_id: Annotated[str | None, Cookie()] = None,
+    ):
     # endpoint that retuns csrf token given session id
 
     if session_id is None:
@@ -81,7 +89,10 @@ def csrf_token(session_id: Annotated[str | None, Cookie()] = None):
     return get_csrf_token_by_session_id(id=session_id)
     
 @router.delete("/logout")
-def logout(session_id: Annotated[str | None, Cookie()] = None):
+def logout(
+    auth_response: AuthServiceDependency,
+    session_id: Annotated[str | None, Cookie()] = None
+    ):
     # delete the session
     try:
         delete_session_by_session_id(id=session_id)

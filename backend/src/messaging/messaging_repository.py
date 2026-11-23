@@ -23,7 +23,7 @@ async def insert_new_message(
     message = Messages(receiver_id=receiver_id, sender_id=sender_id, content=content)
 
     async with db_session:
-        await db_session.add(message)
+        db_session.add(message)
         await db_session.commit()
 
 
