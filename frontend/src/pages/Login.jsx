@@ -30,7 +30,7 @@ export default function Login () {
     return (
         <>
             <Card className='my-auto mx-auto px-32 py-20 text-center'>
-                <div className="text-black">
+                <div className="text-base-content">
                     <h1 className="text-9xl mb-3">Login</h1>
                     <h1 className="text-3xl mb-10">Welcome back.</h1>
                 </div>

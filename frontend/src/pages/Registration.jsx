@@ -47,7 +47,7 @@ export default function Registration () {
     return (
         <>
             <Card className='my-auto mx-auto px-20 py-20 text-center'>
-                <div className="text-black">
+                <div className="text-base-content">
                     <h1 className="text-6xl mb-3">Registration</h1>
                     <h1 className="text-2xl mb-10">Welcome to the team.</h1>
                 </div>

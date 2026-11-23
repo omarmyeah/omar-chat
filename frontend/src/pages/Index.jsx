@@ -40,7 +40,7 @@ function Welcome() {
       </div>
       {/* second column - image of usage */}
       <div className="col-span-1 px-10">
-        <img src="chat-demo.png" alt="A demo of Omar chat" className='border-2 border-black' />
+        <img src="chat-demo.png" alt="A demo of Omar chat" className='border-2 border-base-content' />
       </div>
     </div>
   );
@@ -58,7 +58,7 @@ function AccordionElement({ title, content }) {
 function FrequentlyAskedQuestions({ questionsArray, name, placeholder }) {
   return (
     <>
-      <h1 className="text-5xl text-black mt-10 mb-10 text-center">Frequently Asked Questions</h1>
+      <h1 className="text-5xl text-base-content mt-10 mb-10 text-center">Frequently Asked Questions</h1>
       {/* FAQ Accordion */}
       <div className='mb-10'>
         {questionsArray.map(element => {
@@ -92,7 +92,7 @@ export default function Index() {
   return (
     <>
       <Welcome />
-      <Card className='w-3/4 mx-auto'>
+      <Card className='w-3/4 mx-auto mb-5'>
           <FrequentlyAskedQuestions questionsArray={faqs} name="Omar Chat" placeholder={"{name}"}/>
       </Card>
     </>

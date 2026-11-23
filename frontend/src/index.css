@@ -11,6 +11,20 @@
   --color-tertiary: #FF6B6B;
   --color-neutral: #1A0B2E;
   --color-warning: #E7000B;
+  --color-base-100: oklch(23.26% 0.014 253.1);
+  --color-base-content: oklch(98% 0 0);
+}
+
+
+@plugin "daisyui/theme" {
+  name: "light";
+  --color-primary: #0ea5e9; 
+  --color-secondary: #9D4EDD; 
+  --color-tertiary: #FF6B6B;
+  --color-neutral: #1A0B2E;
+  --color-warning: #E7000B;
+  --color-base-100: #f3f4f6;
+  --color-base-content: #000000;
 }
 
 body, #root {
