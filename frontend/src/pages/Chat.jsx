@@ -30,7 +30,7 @@ export default function Chat() {
                     />
                 </div>
                 <div className="col-span-5 flex flex-1">
-                    <div className="grid grid-rows-12 w-full h-full">
+                    <div className="grid grid-rows-12 w-full h-full bg-white/40">
                         <div className="row-span-11 flex flex-1">
                             <MessagesDisplay className="flex flex-1" />
                         </div>
