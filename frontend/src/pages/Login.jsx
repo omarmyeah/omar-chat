@@ -1,6 +1,4 @@
-import Navbar from "../components/navbar";
 import Card from '../components/Card'
-import Background from "../components/Background";
 import FormField from "../components/FormField";
 import FormSubmissionButton from "../components/FormSubmissionButton"
 import authService from "../services/authService";

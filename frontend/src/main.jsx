@@ -7,14 +7,13 @@ import Registration from './pages/Registration.jsx';
 import PageNotFound from './pages/PageNotFound.jsx';
 import Chat from './pages/Chat.jsx';
 import Index from './pages/Index.jsx';
-import NavbarBgFooter from './layouts/NavbarBgFooter.jsx';
-import NavbarWithBg from './layouts/NavbarWithBg.jsx';
+import Layout from './layouts/Layout.jsx';
 
 createRoot(root).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route element={<NavbarBgFooter navbarClickableItems={
+        <Route element={<Layout footer={true} navbarClickableItems={
           [
             {
               name: 'Login',
@@ -28,12 +27,14 @@ createRoot(root).render(
         } />}>
           <Route path="/" element={<Index />} />
         </Route>
-        <Route element={<NavbarWithBg />}>
+
+        <Route element={<Layout footer={false} />}>
           <Route path="/login" element={<Login />}/>
           <Route path="/register" element={<Registration />} />
           <Route path="/chat/:id?" element={<Chat />}/>
+          <Route path="*" element={<PageNotFound />} />
         </Route>
-        <Route path="*" element={<PageNotFound />} />
+
       </Routes>
     </BrowserRouter>
   </StrictMode>,
