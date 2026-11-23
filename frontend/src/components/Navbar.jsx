@@ -12,7 +12,7 @@ export default function Navbar({ clickableItems=[] }) {
           <ul className="menu menu-horizontal px-1 text-xl">
              {clickableItems && clickableItems.map((item) => {
                 return (
-                <li key={item.name} className="texthover: ">
+                <li key={item.name} className="">
                   <NavLink to={item.path} className={`hover:text-primary`} end>
                     {item.name}
                   </NavLink>

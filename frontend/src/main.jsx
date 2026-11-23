@@ -31,7 +31,7 @@ createRoot(root).render(
         <Route element={<NavbarWithBg />}>
           <Route path="/login" element={<Login />}/>
           <Route path="/register" element={<Registration />} />
-          <Route path="/chat" element={<Chat />}/>
+          <Route path="/chat/:id?" element={<Chat />}/>
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
